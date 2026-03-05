@@ -1,10 +1,17 @@
 from collections import deque 
 
-def fifo(k, m):
+def parse(filename):
+    with open(filename, 'r') as f:
+        k, m = map(int, f.readline().split())
+        requests = list(map(int, f.readline().split()))
+
+    return k, requests
+
+def fifo(k, requests):
     cache = set()
     queue = deque() 
     misses = 0 
-    for request in m: 
+    for request in requests: 
         if request in cache: 
             continue
         else: 
@@ -22,21 +29,14 @@ class ListNode:
         self.next = None
         self.prev = None
 
-def parse(filename):
-    with open(filename, 'r') as f:
-        k, m = map(int, f.readline().split())
-        requests = list(map(int, f.readline().split()))
 
-    return k, requests
-
-def lru(filename):
+def lru(k, requests):
     '''
     in order to keep track of the cached items in the list I will use a hashmap and doubly linked list
     if there is no hit and the queue is too big, remove the head of the linked list and add to the tail
     otherwise check if there is a hit using the hashmap and then remove the linked list node from its position and put it at the end to indicate it was just used
     the hashmap will have key = element value = pointer to the linked list node 
     '''
-    k, requests = parse(filename)
     miss = 0
     cache = {}
     # head = LRU and tail = MRU (most recently used)
@@ -78,9 +78,39 @@ def lru(filename):
             node.prev = mru
             node.next = tail
             tail.prev = node
-
     return miss
 
-def optff(k, m):
+def optff(k, requests):
     misses = 0  
     return misses 
+
+def main():
+    k, requests = parse('test1.in')
+    fifo_misses1 = fifo(k, requests)
+    lru_misses1 = lru(k, requests)
+    with open('test1.out', "w") as f:
+            f.write(f"k: {k}\n")
+            f.write(f"m: {len(requests)}\n")
+            f.write(f"FIFO Misses: {fifo_misses1}\n")
+            f.write(f"LRU Misses: {lru_misses1}")
+
+    k, requests = parse('test2.in')
+    fifo_misses2 = fifo(k, requests)
+    lru_misses2 = lru(k, requests)
+    with open('test2.out', "w") as f:
+            f.write(f"k: {k}\n")
+            f.write(f"m: {len(requests)}\n")
+            f.write(f"FIFO Misses: {fifo_misses2}\n")
+            f.write(f"LRU Misses: {lru_misses2}")
+    
+    k, requests = parse('test3.in')
+    fifo_misses3 = fifo(k, requests)
+    lru_misses3 = lru(k, requests)
+    with open('test3.out', "w") as f:
+            f.write(f"k: {k}\n")
+            f.write(f"m: {len(requests)}\n")
+            f.write(f"FIFO Misses: {fifo_misses3}\n")
+            f.write(f"LRU Misses: {lru_misses3}")
+
+if __name__ == "__main__":
+    main()
