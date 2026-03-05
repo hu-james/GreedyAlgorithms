@@ -22,14 +22,21 @@ class ListNode:
         self.next = None
         self.prev = None
 
+def parse(filename):
+    with open(filename, 'r') as f:
+        k, m = map(int, f.readline().split())
+        requests = list(map(int, f.readline().split()))
 
-def lru(k, requests):
+    return k, requests
+
+def lru(filename):
     '''
     in order to keep track of the cached items in the list I will use a hashmap and doubly linked list
     if there is no hit and the queue is too big, remove the head of the linked list and add to the tail
     otherwise check if there is a hit using the hashmap and then remove the linked list node from its position and put it at the end to indicate it was just used
     the hashmap will have key = element value = pointer to the linked list node 
     '''
+    k, requests = parse(filename)
     miss = 0
     cache = {}
     # head = LRU and tail = MRU (most recently used)
