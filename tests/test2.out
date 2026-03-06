@@ -2,3 +2,4 @@ k: 4
 m: 60
 FIFO Misses: 50
 LRU Misses: 40
+OPTFF Misses: 18
