@@ -116,7 +116,7 @@ def run(input_file):
     lru_misses = lru(k, requests)
     optff_misses = optff(k, requests)
     
-    output_file = input_file.remove_suffix('.in') + '.out' 
+    output_file = input_file.removesuffix('.in') + '.out' 
     with open(output_file, 'w') as f: 
         f.write(f"k: {k}\n")
         f.write(f"m: {len(requests)}\n")
@@ -138,5 +138,6 @@ def main():
         run('../tests/test1.in')
         run('../tests/test2.in')
         run('../tests/test3.in')
+
 if __name__ == "__main__":
     main()
