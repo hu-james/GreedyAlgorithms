@@ -16,3 +16,22 @@ LRU performs better than FIFO as seen in our 3 test cases. The reason this occur
 ### Question 2: Bad Sequence for LRU or FIFO 
 
 ### Question 3: Prove OPTFF is Optimal 
+
+We are trying to prove that the number of misses for OPTFF is no more than (less than or equal to) the number of misses of A where A can be any offline algorithm that knows the full request sequence. 
+
+For all offline algorithms, an item n is only placed in the cache when it is requested if it is not already present. Items are evicted from the cache once the cache limit size has been reached and a new request is made. 
+
+Base case: j = 0, before any requests are made both OPTFF and A have empty caches. 
+Assume that for the first j requests, both caches for A and OPTFF are identical. Therefore, the caches for both scenarios are the same until request j + 1. Let the next cache request be i. 
+
+Case 1: If i is already in the cache then no evictions are made for either A or OPTFF, and the cache remains identical. 
+
+Case 2: i is not in the cache. 
+Let OPTFF evict item x from the cache and let A evict item y from the cache. If x == y, then even after the eviction the caches for A and OPTFF are the same. 
+
+Otherwise the caches for OPTFF and will differ after request i. Let k be the next request made after i where the caches are now different.
+We know that g can not equal x because x was evicted from the cache by OPTFF and if x is the next referenced item, then OPTFF would not have evicted it from the cache, it would have evicted another item. 
+If g == y, then offline algorithm A will result in a miss because it evicted item y in the last request. Alternately, OPTFF will not result in a miss because y is still in its cache. This means that for this scenario, the number of misses for A will exceed the number of misses for OPTFF by 1. 
+If g is not equal to either x or y then both OPTFF and A will result in a miss, and the number of misses will remain equal. 
+
+So by proof of induction on the base case, the number of misses for OPTFF will always be less than or equal to the number of misses for any offline algorithm A. 
