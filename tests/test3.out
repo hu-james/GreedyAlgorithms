@@ -1,0 +1,4 @@
+k: 5
+m: 55
+FIFO Misses: 38
+LRU Misses: 30

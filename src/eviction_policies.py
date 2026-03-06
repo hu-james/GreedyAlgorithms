@@ -81,23 +81,48 @@ def lru(k, requests):
     return miss
 
 def optff(k, requests):
-    misses = 0  
-    return misses 
+    
+    cache = set()
+    misses = 0 
+    for i, request in enumerate(requests): 
+        if request in cache: 
+            continue
+        else: 
+            misses += 1 
+            if len(cache) >= k:
+                farthestNextRequest = (-1, None)
+                for e in cache: 
+                    #find index of farthest next request for an element 
+                    j = i + 1
+                    while j < len(requests) and requests[j] != e: 
+                        j += 1 
+
+                    #if index is valid, check if it's the max index 
+                    if j < len(requests): 
+                        farthestNextRequest = max((j, requests[j]), farthestNextRequest)
+                    #if index reaches end of requests array, just return current element 
+                    else: 
+                        farthestNextRequest = (len(requests), e)
+                        break
+                cache.remove(farthestNextRequest[1])
+            cache.add(request)
+
+    return misses  
 
 def main():
-    k, requests = parse('test1.in')
+    k, requests = parse('../tests/test1.in')
     fifo_misses1 = fifo(k, requests)
     lru_misses1 = lru(k, requests)
-    with open('test1.out', "w") as f:
+    with open('../tests/test1.out', "w") as f:
             f.write(f"k: {k}\n")
             f.write(f"m: {len(requests)}\n")
             f.write(f"FIFO Misses: {fifo_misses1}\n")
             f.write(f"LRU Misses: {lru_misses1}")
 
-    k, requests = parse('test2.in')
+    k, requests = parse('../tests/test2.in')
     fifo_misses2 = fifo(k, requests)
     lru_misses2 = lru(k, requests)
-    with open('test2.out', "w") as f:
+    with open('../tests/test2.out', "w") as f:
             f.write(f"k: {k}\n")
             f.write(f"m: {len(requests)}\n")
             f.write(f"FIFO Misses: {fifo_misses2}\n")
@@ -106,11 +131,10 @@ def main():
     k, requests = parse('test3.in')
     fifo_misses3 = fifo(k, requests)
     lru_misses3 = lru(k, requests)
-    with open('test3.out', "w") as f:
+    with open('../tests/test3.out', "w") as f:
             f.write(f"k: {k}\n")
             f.write(f"m: {len(requests)}\n")
             f.write(f"FIFO Misses: {fifo_misses3}\n")
             f.write(f"LRU Misses: {lru_misses3}")
-
 if __name__ == "__main__":
     main()
