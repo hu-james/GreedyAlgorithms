@@ -1,0 +1,5 @@
+k: 3
+m: 9
+FIFO Misses: 9
+LRU Misses: 9
+OPTFF Misses: 7

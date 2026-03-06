@@ -135,9 +135,9 @@ def main():
 
     else: 
         #run default test cases 
-        run('../tests/test1.in')
-        run('../tests/test2.in')
-        run('../tests/test3.in')
-
+        run('tests/test1.in')
+        run('tests/test2.in')
+        run('tests/test3.in')
+    
 if __name__ == "__main__":
     main()
