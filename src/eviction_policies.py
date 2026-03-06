@@ -1,3 +1,4 @@
+import sys 
 from collections import deque 
 
 def parse(filename):
@@ -109,32 +110,33 @@ def optff(k, requests):
 
     return misses  
 
-def main():
-    k, requests = parse('../tests/test1.in')
-    fifo_misses1 = fifo(k, requests)
-    lru_misses1 = lru(k, requests)
-    with open('../tests/test1.out', "w") as f:
-            f.write(f"k: {k}\n")
-            f.write(f"m: {len(requests)}\n")
-            f.write(f"FIFO Misses: {fifo_misses1}\n")
-            f.write(f"LRU Misses: {lru_misses1}")
-
-    k, requests = parse('../tests/test2.in')
-    fifo_misses2 = fifo(k, requests)
-    lru_misses2 = lru(k, requests)
-    with open('../tests/test2.out', "w") as f:
-            f.write(f"k: {k}\n")
-            f.write(f"m: {len(requests)}\n")
-            f.write(f"FIFO Misses: {fifo_misses2}\n")
-            f.write(f"LRU Misses: {lru_misses2}")
+def run(input_file): 
+    k, requests = parse(input_file)
+    fifo_misses = fifo(k, requests)
+    lru_misses = lru(k, requests)
+    optff_misses = optff(k, requests)
     
-    k, requests = parse('test3.in')
-    fifo_misses3 = fifo(k, requests)
-    lru_misses3 = lru(k, requests)
-    with open('../tests/test3.out', "w") as f:
-            f.write(f"k: {k}\n")
-            f.write(f"m: {len(requests)}\n")
-            f.write(f"FIFO Misses: {fifo_misses3}\n")
-            f.write(f"LRU Misses: {lru_misses3}")
+    output_file = input_file.remove_suffix('.in') + '.out' 
+    with open(output_file, 'w') as f: 
+        f.write(f"k: {k}\n")
+        f.write(f"m: {len(requests)}\n")
+        f.write(f"FIFO Misses: {fifo_misses}\n")
+        f.write(f"LRU Misses: {lru_misses}\n")
+        f.write(f"OPTFF Misses: {optff_misses}\n")
+
+
+    
+
+def main():
+    args = sys.argv[1:]
+    if args:
+        input_file = str(args[0])
+        run(input_file)
+
+    else: 
+        #run default test cases 
+        run('../tests/test1.in')
+        run('../tests/test2.in')
+        run('../tests/test3.in')
 if __name__ == "__main__":
     main()
