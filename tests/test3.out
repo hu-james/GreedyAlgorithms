@@ -1,5 +1,3 @@
-k: 5
-m: 55
-FIFO Misses: 38
-LRU Misses: 30
-OPTFF Misses: 20
+FIFO: 38
+LRU: 30
+OPTFF: 20

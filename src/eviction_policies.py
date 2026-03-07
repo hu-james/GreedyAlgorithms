@@ -118,11 +118,9 @@ def run(input_file):
     
     output_file = input_file.removesuffix('.in') + '.out' 
     with open(output_file, 'w') as f: 
-        f.write(f"k: {k}\n")
-        f.write(f"m: {len(requests)}\n")
-        f.write(f"FIFO Misses: {fifo_misses}\n")
-        f.write(f"LRU Misses: {lru_misses}\n")
-        f.write(f"OPTFF Misses: {optff_misses}\n")
+        f.write(f"FIFO: {fifo_misses}\n")
+        f.write(f"LRU: {lru_misses}\n")
+        f.write(f"OPTFF: {optff_misses}\n")
 
 
     
