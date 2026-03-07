@@ -48,7 +48,7 @@ To test the code on the 3 provided default test cases in tests/, simply run:
 
 ```
 python src/eviction_policies.py
-```. 
+``` 
 
 To test the code on your own test cases, move them to the tests/ directory and run: 
 ```
