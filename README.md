@@ -5,6 +5,36 @@ James Hu (78869080), Priya Khatri (24056337)
 ## Repository Overview
 This repository contains source code for implementing FIFO, LRU, and OPTFF algorithms and written answers to the questions below. 
 
+## Repository Structure
+
+```
+GreedyAlgorithms/
+├── src/
+│   └── eviction_policies.py - Source code with FIFO, LRU, OPTFF implementations, main, parsing & file IO 
+├── tests/ - contains sample test cases 1-3 and the request sequence test for Q2 
+└── README.md 
+```
+
+## Code Instructions
+First set up Python in your environment. 
+
+Then clone the repository: 
+``` 
+git clone https://github.com/hu-james/GreedyAlgorithms.git
+cd GreedyAlgorithms 
+```
+
+To test the code on the 3 provided default test cases in tests/, simply run:
+
+```
+python src/eviction_policies.py
+```. 
+
+To test the code on your own test cases, move them to the tests/ directory and run: 
+```
+python src/eviction_policies.py tests/YOUR_TEST.in 
+```
+
 ## Questions 
 
 ### Question 1: Empirical Comparison 
