@@ -39,6 +39,12 @@ python src/eviction_policies.py tests/YOUR_TEST.in
 
 ### Question 1: Empirical Comparison 
 
+| Input File | k | m | FIFO | LRU | OPTFF | 
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| test1 | 3 | 70 | 47 | 25 | 25 |
+| test2 | 4 | 60 | 50 | 40 | 18 |
+| test3 | 5 | 55 | 38 | 30 | 20 |
+
 Yes, OPTFF has the least amount of misses, as seen in our 3 non trivial test outputs. The reason why this is optimal is because it removes the least needed (or farthest needed) item from the cache, reducing cache misses. LRU removes the item that is least recently used, but just because an item was not recently used doesn't mean that it won't get referenced in the future. Because OPTFF checks what requests will be made in the future it is able to greedily avoid cache misses.
 
 LRU performs better than FIFO as seen in our 3 test cases. The reason this occurs is because LRU removes items from the cache that haven't been referenced in a while and keep the most popular items in the cache. Assuming recency bias, items that have been referenced frequently will most likely be referenced again too. So LRU reduces cache misses by focusing on recency when compared to FIFO. 
