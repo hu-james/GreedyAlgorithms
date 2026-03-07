@@ -15,6 +15,26 @@ GreedyAlgorithms/
 └── README.md 
 ```
 
+## Assumptions 
+
+### Input Format 
+Input should be an .in file in tests/ with the format:
+```
+k m 
+r1 r2 r3 ... rm
+``` 
+
+k should be >= 1, and m must equal the length of the sequence. 
+
+### Output Format 
+Output will be an .out file with the same name as the input file. Its content will be the format: 
+```
+FIFO: <n_misses>
+LRU: <n_misses>
+OPTFF: <n_misses>
+```
+
+
 ## Code Instructions
 First set up Python in your environment. 
 
